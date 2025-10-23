@@ -192,7 +192,7 @@
         <a href="#relacionamentos" class="nav-link topnav-btn">RELAÇÕES</a>
         <a href="#numeros" class="nav-link topnav-btn">NÚMEROS</a>
         <a href="#video" class="nav-link topnav-btn">VÍDEO</a>
-        <a href="idealizadores.html" class="nav-link topnav-btn">IDEALIZADORES</a>
+        <a href="idealizadores.html" class="nav-link topnav-btn" style="background:#fff;color:#4a90e2;font-weight:700;box-shadow:0 2px 12px #4a90e233;">IDEALIZADORES</a>
         <a href="#gravidez-adolescencia" class="nav-link topnav-btn">GRAVIDEZ NA ADOLESCÊNCIA</a>
         <a href="#quiz" class="nav-link topnav-btn" style="background:#fff;color:#4a90e2;font-weight:700;box-shadow:0 2px 12px #4a90e233;">QUIZ</a>
    
@@ -547,9 +547,52 @@
       <section id="video" class="card" aria-labelledby="video-title" style="margin-top:2rem;background:linear-gradient(90deg,#f4f7f9 60%,#e0fcf7 100%);box-shadow:0 4px 18px #4a90e211;">
         <h2 id="video-title" style="color:#357abd;font-size:1.2rem;margin-bottom:1.2rem;">🎬 Vídeo: Educação Sexual e Prevenção</h2>
         <div style="display:flex;justify-content:center;align-items:center;flex-direction:column;gap:1rem;">
-          <div style="width:100%;max-width:480px;aspect-ratio:16/9;background:#000;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px #4a90e222;">
-            <iframe width="100%" height="100%" style="min-height:240px;" src="https://youtu.be/a1Ck7NM_euY?si=Hzu_i3QVZH9JJSPA" title="Educação Sexual para Adolescentes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <div style="width:100%;max-width:480px;aspect-ratio:16/9;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px #4a90e222;position:relative;">
+            <!-- Placeholder: carregamos o iframe apenas quando o usuário clicar (melhora compatibilidade e evita bloqueios automáticos) -->
+            <div class="video-placeholder" data-video-id="tvQ5deXx7HM" role="button" tabindex="0" aria-label="Reproduzir vídeo: Educação Sexual para Adolescentes" style="width:100%;height:100%;display:block;cursor:pointer;background:#000;position:relative;">
+              <img src="https://img.youtube.com/vi/tvQ5deXx7HM/hqdefault.jpg" alt="Thumbnail do vídeo Educação Sexual para Adolescentes" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy"/>
+              <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;">
+                <!-- ícone de play -->
+                <svg width="96" height="96" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <circle cx="32" cy="32" r="30" fill="rgba(0,0,0,0.45)"/>
+                  <path d="M26 20 L46 32 L26 44 Z" fill="#fff"/>
+                </svg>
+              </div>
+            </div>
           </div>
+          <p class="muted" style="font-size:0.95rem;margin-top:0.4rem;">
+            Caso o vídeo não carregue no seu navegador ou seja bloqueado, <a href="https://www.youtube.com/watch?v=tvQ5deXx7HM" target="_blank" rel="noopener">abra o vídeo no YouTube</a>.
+          </p>
+          <script>
+            // Carrega o iframe do YouTube ao clicar no placeholder. Mantém link de fallback caso o embed seja bloqueado.
+            (function(){
+              function loadVideo(el){
+                const id = el.getAttribute('data-video-id');
+                if(!id) return;
+                const iframe = document.createElement('iframe');
+                iframe.width = '100%'; iframe.height = '100%';
+                iframe.style.minHeight = '240px';
+                iframe.src = 'https://www.youtube.com/embed/' + id + '?rel=0';
+                iframe.title = el.getAttribute('aria-label') || 'Vídeo';
+                iframe.frameBorder = '0';
+                iframe.setAttribute('allow','accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen');
+                iframe.setAttribute('allowfullscreen','');
+                iframe.loading = 'lazy';
+                // Substitui o placeholder pelo iframe
+                el.parentNode.replaceChild(iframe, el);
+              }
+
+              document.addEventListener('click', function(e){
+                const ph = e.target.closest && e.target.closest('.video-placeholder');
+                if(ph){ loadVideo(ph); }
+              });
+              document.addEventListener('keydown', function(e){
+                if((e.key === 'Enter' || e.key === ' ') && document.activeElement && document.activeElement.classList && document.activeElement.classList.contains('video-placeholder')){
+                  e.preventDefault(); loadVideo(document.activeElement);
+                }
+              });
+            })();
+          </script>
           <p class="muted" style="font-size:1rem;">Assista a este vídeo para entender mais sobre prevenção, saúde e sexualidade na adolescência.<br><span style="font-size:0.95rem;color:#888;">Fonte: Canal UNFPA no Brasil</span></p>
         </div>
       </section>
